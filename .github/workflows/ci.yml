@@ -2,22 +2,26 @@
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: 3.10
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
 
-    - name: Install dependencies
-      run: pip install pandas numpy scikit-learn xgboost
+      - name: Install dependencies
+        run: |
+          pip install pandas numpy scikit-learn xgboost
 
-    - name: Run pipeline
-      run: python pipeline.py
+      - name: Run pipeline
+        run: |
+          python pipeline.py
